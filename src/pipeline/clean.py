@@ -18,14 +18,9 @@ def clean(df: DataFrame) -> DataFrame:
     # Convert dates to one format
     df_cleaned = df_cleaned.withColumn(
         "order_time",
-        F.coalesce(
-            F.try_to_timestamp("order_time", F.lit("yyyy-MM-dd HH:mm:ss")),
-            F.try_to_timestamp("order_time", F.lit("yyyy-MM-dd HH:mm")),
-            F.try_to_timestamp("order_time", F.lit("yyyy-MM-dd")),
-            F.try_to_timestamp("order_time", F.lit("MM/dd/yyyy HH:mm:ss")),
-            F.try_to_timestamp("order_time", F.lit("MM/dd/yyyy")),
-        ),
+        F.coalesce(F.try_to_timestamp("order_time", F.lit("yyyy-MM-dd HH:mm:ss"))),
     )
+
     # Fill missing quantity with 1
     df_cleaned = df_cleaned.withColumn(
         "quantity", F.when(F.col("quantity").isNull(), 1).otherwise(F.col("quantity"))
@@ -48,9 +43,7 @@ def clean(df: DataFrame) -> DataFrame:
 
 def dedup(df: DataFrame) -> DataFrame:
     # order by time
-    w = Window.partitionBy("order_id").orderBy(
-        F.col("order_time").desc_nulls_last()  # latest time
-    )
+    w = Window.partitionBy("order_id").orderBy(F.col("order_time").desc_nulls_last())
 
     df_deduped = (
         df.withColumn("rn", F.row_number().over(w)).filter(F.col("rn") == 1).drop("rn")

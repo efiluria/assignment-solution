@@ -1,8 +1,3 @@
-# Create a small Python API service FastAPI, read from the parquet file created in the previous step, and expose two APIs:
-# API 1:
-# Get order by order_id
-# API 2:
-# Get total sales per city
 import yaml
 from src.api.schemas import CitySalesResponse, OrderResponse
 from fastapi import FastAPI, HTTPException
