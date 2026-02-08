@@ -1,17 +1,14 @@
-configuration: config/config.yaml
+**configuration**: config/config.yaml
 
 - change input file
-- Output location
+- output location
 
-build
-
+**build**
 docker compose build
 
-run pipeline
-
+**run pipeline**
 docker compose run --rm pipeline
 
-run api
-
+**run api**
 docker compose up -d api
 [text](http://localhost:8000/docs)
