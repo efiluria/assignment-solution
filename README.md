@@ -10,5 +10,5 @@ docker compose build
 docker compose run --rm pipeline
 
 **run api**\
-docker compose up -d api
+docker compose up -d api \
 [http://localhost:8000/docs](http://localhost:8000/docs)
