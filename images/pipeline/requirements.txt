@@ -1,0 +1,14 @@
+pyspark
+# black             
+# click            
+# colorama         
+# mypy_extensions  
+# packaging        
+# pathspec         
+# pip               
+# platformdirs      
+# py4j              
+# pytokens          
+PyYAML           
+# setuptools        
+# tomli             

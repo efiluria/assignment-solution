@@ -1,0 +1,24 @@
+services:
+  pipeline:
+    build:
+      context: .
+      dockerfile: images/pipeline/Dockerfile
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config
+    environment:
+      INPUT_FILE_NAME: ${INPUT_FILE_NAME:-orders_raw_data.csv}
+    command:
+      ["python", "-m", "src.pipeline.main", "--config", "config/config.yaml"]
+
+  api:
+    build:
+      context: .
+      dockerfile: images/api/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config
+    # depends_on:
+    #   - pipeline
