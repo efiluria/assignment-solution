@@ -47,7 +47,7 @@ def clean(df: DataFrame) -> DataFrame:
 
 
 def dedup(df: DataFrame) -> DataFrame:
-    # order by time, row number
+    # order by time
     w = Window.partitionBy("order_id").orderBy(
         F.col("order_time").desc_nulls_last()  # latest time
     )
