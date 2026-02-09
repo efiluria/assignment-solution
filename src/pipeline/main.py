@@ -20,7 +20,7 @@ def main():
 
     try:
         config = load_config()
-        input_file_path = config["input_file_path"]
+        input_file_path = os.getenv("INPUT_FILE_NAME", "data/raw/orders_raw_data.csv")
         print(f"Reading input file: {input_file_path}")
 
         df = (
