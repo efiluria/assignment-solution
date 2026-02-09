@@ -11,7 +11,8 @@ def clean(df: DataFrame) -> DataFrame:
     df_cleaned = df_cleaned.withColumn(
         "status",
         F.when(
-            F.col("status").isin("completed", "pending", "failed"), F.col("status")
+            F.lower(F.col("status")).isin("completed", "pending", "failed"),
+            F.col("status"),
         ).otherwise("pending"),
     )
 
